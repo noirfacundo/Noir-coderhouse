@@ -1,0 +1,48 @@
+CREATE DATABASE farmacia_orlowski;
+USE farmacia_orlowski;
+CREATE TABLE empleados (
+id_empleado INT AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(50) NOT NULL,
+apellido VARCHAR(50) NOT NULL,
+numero_contacto VARCHAR(20),
+direccion VARCHAR(100),
+mail VARCHAR(100)
+);
+CREATE TABLE clientes (
+id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+cobertura_medica VARCHAR(50),
+nombre VARCHAR(50) NOT NULL,
+apellido VARCHAR(50) NOT NULL,
+numero_contacto VARCHAR(20),
+mail VARCHAR(100)
+);
+CREATE TABLE proveedores (
+id_proveedor INT AUTO_INCREMENT PRIMARY KEY,
+nombre_drogueria VARCHAR(100) NOT NULL,
+numero_contacto VARCHAR(20),
+mail VARCHAR(100),
+nombre_vendedor VARCHAR(50)
+);
+CREATE TABLE productos (
+id_producto INT AUTO_INCREMENT PRIMARY KEY,
+nombre VARCHAR(100) NOT NULL,
+formula_quimica VARCHAR(100),
+id_proveedor INT,
+FOREIGN KEY (id_proveedor) REFERENCES proveedores(id_proveedor)
+);
+CREATE TABLE ventas (
+numero_ticket INT AUTO_INCREMENT PRIMARY KEY,
+fecha_transaccion DATE NOT NULL,
+id_empleado INT NOT NULL,
+id_cliente INT NOT NULL,
+FOREIGN KEY (id_empleado) REFERENCES empleados(id_empleado),
+FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
+);
+CREATE TABLE detalle_venta (
+id_detalle INT AUTO_INCREMENT PRIMARY KEY,
+numero_ticket INT NOT NULL,
+id_producto INT NOT NULL,
+cantidad INT NOT NULL,
+FOREIGN KEY (numero_ticket) REFERENCES ventas(numero_ticket),
+FOREIGN KEY (id_producto) REFERENCES productos(id_producto)
+);
