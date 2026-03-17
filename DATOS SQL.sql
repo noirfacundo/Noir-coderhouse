@@ -1,8 +1,5 @@
 
--- =============================================
--- SCRIPT: proyecto_datos_pro.sql
--- Inserción de datos para probar el sistema
--- =============================================
+
 
 INSERT INTO empleados (nombre, apellido, numero_contacto, direccion, mail)
 VALUES
