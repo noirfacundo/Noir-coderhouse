@@ -1,13 +1,4 @@
 
--- =============================================
--- SCRIPT: proyecto_objetos_pro.sql
--- Contiene VISTAS, FUNCIONES, STORED PROCEDURES y TRIGGERS
--- Base de datos: Farmacia Orlowski
--- =============================================
-
--- =======================
--- VISTAS
--- =======================
 
 CREATE VIEW vista_ventas_clientes AS
 SELECT 
