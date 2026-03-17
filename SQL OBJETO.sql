@@ -57,9 +57,7 @@ ON c.id_cliente = v.id_cliente
 GROUP BY c.id_cliente;
 
 
--- =======================
--- FUNCIONES
--- =======================
+
 
 DELIMITER //
 
@@ -124,9 +122,7 @@ END //
 DELIMITER ;
 
 
--- =======================
--- STORED PROCEDURES
--- =======================
+
 
 DELIMITER //
 
@@ -186,9 +182,7 @@ END //
 DELIMITER ;
 
 
--- =======================
--- TRIGGERS
--- =======================
+
 
 DELIMITER //
 
