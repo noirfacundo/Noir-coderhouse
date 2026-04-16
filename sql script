@@ -212,6 +212,51 @@ FROM clientes c
 LEFT JOIN ventas v ON c.id_cliente = v.id_cliente
 GROUP BY c.nombre;
 
+CREATE VIEW vista_pagos AS
+SELECT 
+p.numero_ticket,
+m.descripcion AS metodo_pago,
+p.monto
+FROM pagos p
+JOIN metodos_pago m ON p.id_metodo = m.id_metodo;
+
+CREATE VIEW vista_stock_productos AS
+SELECT 
+pr.nombre AS producto,
+s.cantidad
+FROM stock s
+JOIN productos pr ON s.id_producto = pr.id_producto;
+
+CREATE VIEW vista_compras AS
+SELECT 
+c.id_compra,
+c.fecha,
+p.nombre_drogueria
+FROM compras c
+JOIN proveedores p ON c.id_proveedor = p.id_proveedor;
+
+CREATE VIEW vista_detalle_compras AS
+SELECT 
+dc.id_compra,
+pr.nombre AS producto,
+dc.cantidad
+FROM detalle_compra dc
+JOIN productos pr ON dc.id_producto = pr.id_producto;
+
+CREATE VIEW vista_recetas_clientes AS
+SELECT 
+c.nombre,
+c.apellido,
+r.descripcion
+FROM recetas r
+JOIN clientes c ON r.id_cliente = c.id_cliente;
+
+CREATE VIEW vista_sucursales AS
+SELECT 
+id_sucursal,
+nombre
+FROM sucursales;
+
 DELIMITER //
 
 
