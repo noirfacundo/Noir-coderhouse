@@ -1,13 +1,6 @@
--- =========================================
--- BASE DE DATOS
--- =========================================
 DROP DATABASE IF EXISTS farmacia_orlowski;
 CREATE DATABASE farmacia_orlowski;
 USE farmacia_orlowski;
-
--- =========================================
--- TABLAS
--- =========================================
 
 CREATE TABLE clientes (
     id_cliente INT AUTO_INCREMENT PRIMARY KEY,
@@ -101,10 +94,6 @@ CREATE TABLE recetas (
     FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
 );
 
--- =========================================
--- INSERTS
--- =========================================
-
 INSERT INTO clientes VALUES
 (1,'Juan','Perez','OSDE'),
 (2,'Ana','Lopez','Swiss'),
@@ -147,59 +136,6 @@ INSERT INTO detalle_venta VALUES
 (4,4,4,2),
 (5,5,5,1);
 
-INSERT INTO metodos_pago VALUES
-(1,'Efectivo'),
-(2,'Tarjeta'),
-(3,'Transferencia'),
-(4,'QR'),
-(5,'Debito');
-
-INSERT INTO pagos VALUES
-(1,1,1,1000),
-(2,2,2,1500),
-(3,3,3,2000),
-(4,4,4,1200),
-(5,5,5,900);
-
-INSERT INTO stock VALUES
-(1,1,50),
-(2,2,40),
-(3,3,30),
-(4,4,20),
-(5,5,10);
-
-INSERT INTO compras VALUES
-(1,'2026-01-01',1),
-(2,'2026-01-02',2),
-(3,'2026-01-03',3),
-(4,'2026-01-04',4),
-(5,'2026-01-05',5);
-
-INSERT INTO detalle_compra VALUES
-(1,1,1,100),
-(2,2,2,80),
-(3,3,3,60),
-(4,4,4,40),
-(5,5,5,20);
-
-INSERT INTO sucursales VALUES
-(1,'Centro'),
-(2,'Norte'),
-(3,'Sur'),
-(4,'Este'),
-(5,'Oeste');
-
-INSERT INTO recetas VALUES
-(1,1,'Tratamiento A'),
-(2,2,'Tratamiento B'),
-(3,3,'Tratamiento C'),
-(4,4,'Tratamiento D'),
-(5,5,'Tratamiento E');
-
--- =========================================
--- VISTAS
--- =========================================
-
 CREATE VIEW vista_ventas_clientes AS
 SELECT v.numero_ticket, c.nombre, c.apellido
 FROM ventas v
@@ -226,10 +162,6 @@ SELECT c.nombre, COUNT(v.numero_ticket) total
 FROM clientes c
 LEFT JOIN ventas v ON c.id_cliente = v.id_cliente
 GROUP BY c.nombre;
-
--- =========================================
--- FUNCIONES
--- =========================================
 
 DELIMITER //
 
@@ -268,14 +200,6 @@ SELECT IFNULL(AVG(cantidad),0) INTO prom FROM detalle_venta WHERE numero_ticket 
 RETURN prom;
 END //
 
-DELIMITER ;
-
--- =========================================
--- STORED PROCEDURES
--- =========================================
-
-DELIMITER //
-
 CREATE PROCEDURE registrar_cliente(nombreC VARCHAR(50), apellidoC VARCHAR(50))
 BEGIN
 INSERT INTO clientes(nombre, apellido) VALUES(nombreC, apellidoC);
@@ -292,14 +216,6 @@ BEGIN
 INSERT INTO productos(nombre, id_proveedor)
 VALUES(nombreP, proveedor);
 END //
-
-DELIMITER ;
-
--- =========================================
--- TRIGGERS
--- =========================================
-
-DELIMITER //
 
 CREATE TRIGGER control_cantidad
 BEFORE INSERT ON detalle_venta
@@ -331,3 +247,10 @@ END IF;
 END //
 
 DELIMITER ;
+
+-- Backup sugerido:
+-- mysqldump -u root -p farmacia_orlowski > backup_farmacia.sql
+
+CREATE TABLE backup_clientes AS SELECT * FROM clientes;
+CREATE TABLE backup_productos AS SELECT * FROM productos;
+CREATE TABLE backup_ventas AS SELECT * FROM ventas;
