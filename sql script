@@ -384,9 +384,4 @@ END //
 
 DELIMITER ;
 
--- Backup sugerido:
--- mysqldump -u root -p farmacia_orlowski > backup_farmacia.sql
-
-CREATE TABLE backup_clientes AS SELECT * FROM clientes;
-CREATE TABLE backup_productos AS SELECT * FROM productos;
-CREATE TABLE backup_ventas AS SELECT * FROM ventas;
+mysqldump -u root -p farmacia_orlowski > backup_completo.sql
