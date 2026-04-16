@@ -214,6 +214,48 @@ GROUP BY c.nombre;
 
 DELIMITER //
 
+
+CREATE FUNCTION total_pagado_ticket(ticket INT) RETURNS DECIMAL(10,2)
+BEGIN
+DECLARE total DECIMAL(10,2);
+SELECT IFNULL(SUM(monto),0)
+INTO total
+FROM pagos
+WHERE numero_ticket = ticket;
+RETURN total;
+END;
+
+CREATE FUNCTION stock_producto(idProd INT) RETURNS INT
+BEGIN
+DECLARE total INT;
+SELECT IFNULL(SUM(cantidad),0)
+INTO total
+FROM stock
+WHERE id_producto = idProd;
+RETURN total;
+END;
+
+CREATE FUNCTION total_compras_proveedor(idProv INT) RETURNS INT
+BEGIN
+DECLARE total INT;
+SELECT IFNULL(SUM(dc.cantidad),0)
+INTO total
+FROM compras c
+JOIN detalle_compra dc ON c.id_compra = dc.id_compra
+WHERE c.id_proveedor = idProv;
+RETURN total;
+END;
+
+CREATE FUNCTION recetas_cliente(idCliente INT) RETURNS INT
+BEGIN
+DECLARE total INT;
+SELECT COUNT(*)
+INTO total
+FROM recetas
+WHERE id_cliente = idCliente;
+RETURN total;
+END;
+
 CREATE FUNCTION total_productos_vendidos(ticket INT) RETURNS INT
 BEGIN
 DECLARE total INT;
