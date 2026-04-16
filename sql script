@@ -94,6 +94,55 @@ CREATE TABLE recetas (
     FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
 );
 
+INSERT INTO metodos_pago (id_metodo, descripcion) VALUES
+(1,'Efectivo'),
+(2,'Tarjeta'),
+(3,'Transferencia'),
+(4,'QR'),
+(5,'Debito');
+
+INSERT INTO pagos (id_pago, numero_ticket, id_metodo, monto) VALUES
+(1,1,1,1000),
+(2,2,2,1500),
+(3,3,3,2000),
+(4,4,4,1200),
+(5,5,5,900);
+
+INSERT INTO stock (id_stock, id_producto, cantidad) VALUES
+(1,1,50),
+(2,2,40),
+(3,3,30),
+(4,4,20),
+(5,5,10);
+
+INSERT INTO compras (id_compra, fecha, id_proveedor) VALUES
+(1,'2026-01-01',1),
+(2,'2026-01-02',2),
+(3,'2026-01-03',3),
+(4,'2026-01-04',4),
+(5,'2026-01-05',5);
+
+INSERT INTO detalle_compra (id_detalle, id_compra, id_producto, cantidad) VALUES
+(1,1,1,100),
+(2,2,2,80),
+(3,3,3,60),
+(4,4,4,40),
+(5,5,5,20);
+
+INSERT INTO sucursales (id_sucursal, nombre) VALUES
+(1,'Centro'),
+(2,'Norte'),
+(3,'Sur'),
+(4,'Este'),
+(5,'Oeste');
+
+INSERT INTO recetas (id_receta, id_cliente, descripcion) VALUES
+(1,1,'Tratamiento A'),
+(2,2,'Tratamiento B'),
+(3,3,'Tratamiento C'),
+(4,4,'Tratamiento D'),
+(5,5,'Tratamiento E');
+
 INSERT INTO clientes VALUES
 (1,'Juan','Perez','OSDE'),
 (2,'Ana','Lopez','Swiss'),
